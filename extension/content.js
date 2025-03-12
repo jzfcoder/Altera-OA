@@ -16,6 +16,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         // alert('content script will update!'); // THIS IS NOT RUNNING
         recordPageVisit();
         addListeners();
+    } else if (request.action === "executeAction") {
+        executeAction(request.data);
     }
 });
 
@@ -77,12 +79,47 @@ function debounce(func, wait) {
 function getXPath(element) {
     if (!element) return null;
     if (element.id) return `//*[@id="${element.id}"]`;
-    if (element === document.body) return element.tagName.toLowerCase();
+    if (element === document.body) return '/html/body';
 
-    const siblingIndex = Array.from(element.parentNode.children).filter(e => e.tagName === element.tagName).indexOf(element) + 1;
-    const tagName = element.tagName.toLowerCase();
-    const parentXPath = getXPath(element.parentNode);
+    let path = '';
+    while (element && element.nodeType === Node.ELEMENT_NODE) {
+        let index = 0;
+        let sibling = element.previousSibling;
+        while (sibling) {
+            if (sibling.nodeType === Node.DOCUMENT_TYPE_NODE) {
+                sibling = sibling.previousSibling;
+                continue;
+            }
+            if (sibling.nodeName === element.nodeName) {
+                index++;
+            }
+            sibling = sibling.previousSibling;
+        }
+        const tagName = element.nodeName.toLowerCase();
+        const position = index ? `[${index + 1}]` : '';
+        path = `/${tagName}${position}${path}`;
+        element = element.parentNode;
+    }
+    return path;
+}
 
-    const indexSegment = siblingIndex > 1 ? `[${siblingIndex}]` : '';
-    return `${parentXPath}/${tagName}${indexSegment}`;
+function executeAction(action) {
+    if (action.type === 'click') {
+        const element = document.evaluate(action.selector, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        alert(element);
+        if (element) {
+            element.click();
+        }
+    } else if (action.type === 'input') {
+        const element = document.evaluate(action.selector, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if (element) {
+            element.value = action.value;
+            element.innerText = action.value;
+            element.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+    } else if (action.type === 'scroll') {
+        window.scrollTo(action.x, action.y);
+    } else if (action.type === 'pageVisit') {
+        window.location.href = action.url
+    }
 }

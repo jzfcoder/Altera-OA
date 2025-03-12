@@ -11,7 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Must have ChromeDrive added to PATH
+# Must have ChromeDriver added to PATH
 SHOW_BROWSER = True
 
 
@@ -31,14 +31,17 @@ def initialize_driver():
 
 def replay_actions(driver, recorded_actions):
     wait = WebDriverWait(driver, 10)
+    previous_timestamp = None
 
     for action in recorded_actions:
         timestamp = action['timestamp']
         action_type = action['type']
         
         # Wait for the time difference between actions (for realism)
-        if timestamp > time.time() * 1000:
-            time.sleep((timestamp - time.time() * 1000) / 1000.0)
+        if previous_timestamp:
+            diff = timestamp - previous_timestamp
+            if diff > 0:
+                time.sleep(diff / 1000)
 
         if action_type == 'pageVisit':
             print(f"Visiting: {action['url']}")

@@ -2,33 +2,39 @@
   {
     "type": "pageVisit",
     "url": "https://chatgpt.com/",
-    "timestamp": 1741751796748
+    "timestamp": 1741756566991
   },
   {
     "type": "input",
     "selector": "//*[@id=\"prompt-textarea\"]",
-    "timestamp": 1741751805628,
+    "timestamp": 1741756571630,
+    "value": "tell me about n"
+  },
+  {
+    "type": "input",
+    "selector": "//*[@id=\"prompt-textarea\"]",
+    "timestamp": 1741756573501,
     "value": "tell me about nvidia's evo 2"
   },
   {
     "type": "click",
-    "selector": "/html/body/div[1]/div/div[1]/div/main/div[1]/div[2]/div/div/div/div[4]/form/div/div/div/div/div[2]/div[2]/button",
-    "timestamp": 1741751809109
+    "selector": "/html/body/div/div/div/div/main/div/div[2]/div/div/div/div[4]/form/div/div/div/div/div[2]/div/div[2]/div/span/button/div",
+    "timestamp": 1741756574204
+  },
+  {
+    "type": "click",
+    "selector": "/div/div/div/div[4]/form/div/div/div/div/div[2]/div[2]/button/svg",
+    "timestamp": 1741756575237
   },
   {
     "type": "input",
     "selector": "//*[@id=\"prompt-textarea\"]",
-    "timestamp": 1741751819109,
-    "value": "what are nucleotides?"
+    "timestamp": 1741756585237,
+    "value": "What are nucleotides?"
   },
   {
     "type": "click",
-    "selector": "/html/body/div[1]/div/div[1]/div/main/div[1]/div[2]/div/div/div/div[4]/form/div/div/div/div/div[2]/div[2]/button",
-    "timestamp": 1741751829109
-  },
-  {
-    "type": "click",
-    "selector": "/html/body/div[1]/div/div[1]/div/main/div[1]/div[2]/div/div/div/div[4]/form/div/div/div/div/div[2]/div[2]/button",
-    "timestamp": 1741851829109
+    "selector": "/div/div/div/div[4]/form/div/div/div/div/div[2]/div[2]/button/svg",
+    "timestamp": 1741756587237
   }
 ]

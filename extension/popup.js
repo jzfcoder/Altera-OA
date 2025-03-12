@@ -35,6 +35,12 @@ document.getElementById("download").addEventListener("click", () => {
     });
 });
 
+document.getElementById("runRecording").addEventListener("click", () => {
+    chrome.runtime.sendMessage({ action: "getRawData" }, (response) => {
+        runRecording(response.data);
+    });
+});
+
 function loadPreviousData() {
     chrome.runtime.sendMessage({ action: "getRawData" }, (response) => {
         document.getElementById('jsonData').innerText = JSON.stringify(response.data, null, 2);
@@ -48,5 +54,18 @@ function checkIfRecording() {
         } else {
             document.getElementById("toggleRecording").innerText = "Start Recording";
         }
+    });
+}
+
+function runRecording(actions) {
+    chrome.windows.create({ url: actions[0].url, type: 'popup' }, (newWindow) => {
+        first_time_stamp = actions[0].timestamp;
+        const newTabId = newWindow.tabs[0].id;
+        actions.forEach((action, index) => {
+            if (index === 0) return;
+            setTimeout(() => {
+                chrome.tabs.sendMessage(newTabId, { action: "executeAction", data: action });
+            }, action.timestamp - first_time_stamp); // same delay as original recording
+        });
     });
 }
