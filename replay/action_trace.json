@@ -1,0 +1,34 @@
+[
+  {
+    "type": "pageVisit",
+    "url": "https://chatgpt.com/",
+    "timestamp": 1741751796748
+  },
+  {
+    "type": "input",
+    "selector": "//*[@id=\"prompt-textarea\"]",
+    "timestamp": 1741751805628,
+    "value": "tell me about nvidia's evo 2"
+  },
+  {
+    "type": "click",
+    "selector": "/html/body/div[1]/div/div[1]/div/main/div[1]/div[2]/div/div/div/div[4]/form/div/div/div/div/div[2]/div[2]/button",
+    "timestamp": 1741751809109
+  },
+  {
+    "type": "input",
+    "selector": "//*[@id=\"prompt-textarea\"]",
+    "timestamp": 1741751819109,
+    "value": "what are nucleotides?"
+  },
+  {
+    "type": "click",
+    "selector": "/html/body/div[1]/div/div[1]/div/main/div[1]/div[2]/div/div/div/div[4]/form/div/div/div/div/div[2]/div[2]/button",
+    "timestamp": 1741751829109
+  },
+  {
+    "type": "click",
+    "selector": "/html/body/div[1]/div/div[1]/div/main/div[1]/div[2]/div/div/div/div[4]/form/div/div/div/div/div[2]/div[2]/button",
+    "timestamp": 1741851829109
+  }
+]
