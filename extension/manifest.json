@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "JeremyActionTracer",
+    "description": "This extension can record user actions",
+    "version": "1.0",
+    "permissions": ["activeTab", "scripting", "storage"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "host_permissions": ["<all_urls>"],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "run_at": "document_idle"
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    }
+}
